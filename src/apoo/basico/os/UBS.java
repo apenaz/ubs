@@ -1,14 +1,13 @@
 /**
  * 
  */
-package apoo.buscaUBS;
+package apoo.basico.os;
 
 /**
  * @author apenaz
  *
  */
 public class UBS {
-
 	double vlr_latitude;
 	double vlr_longitude;
 	int cod_munic;
@@ -22,6 +21,43 @@ public class UBS {
 	String dsc_adap_defic_fisic_idosos;
 	String dsc_equipamentos;
 	String dsc_medicamentos;
+
+	public UBS(String[] atributo) {
+		try {
+			vlr_latitude = Double.parseDouble(atributo[0]);
+		} catch (NumberFormatException e) {
+			  System.err.println("valor de latitude inválido!");
+		}
+		
+		try {
+			vlr_longitude= Double.parseDouble(atributo[1]);
+		} catch (NumberFormatException e) {
+			  System.err.println("valor de longitude inválido!");
+		}
+		try {
+			cod_munic= Integer.parseInt(atributo[2]);
+		} catch (NumberFormatException e) {
+			System.err.println("valor de codigo de município inválido!");
+		}
+		try {
+		cod_cnes= Integer.parseInt(atributo[3]);
+		} catch (NumberFormatException e) {
+			System.err.println("valor de codigo de estabelecimento de saúde inválido!");
+		}
+		nom_estab= atributo[4];
+		dsc_endereco= atributo[5];
+		dsc_bairro= atributo[6];
+		dsc_cidade= atributo[7];
+		dsc_telefone= atributo[8];
+		dsc_estrut_fisic_ambiencia = atributo[9];
+		dsc_adap_defic_fisic_idosos= atributo[10];
+		dsc_equipamentos= atributo[11];
+		dsc_medicamentos= atributo[12];
+	}
+
+	public UBS() {
+
+	}
 
 	public double getVlr_latitude() {
 		return vlr_latitude;
