@@ -6,12 +6,10 @@ import apoo.basico.os.UBS;
 import apoo.file.MyFile;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 
 /**
  * @author apenaz
@@ -20,7 +18,6 @@ import java.nio.file.Paths;
 public class Main {
 
 	private static Scanner i;
-
 	/**
 	 * @param args
 	 */
@@ -28,32 +25,20 @@ public class Main {
 		
 		List<UBS> ubss = new ArrayList<UBS>();
 		MyFile arquivo = new MyFile();
-		MyFile saida = new MyFile();
 		
 		i = new Scanner(System.in);
 		
 		System.out.println("digite o arquivo com as informções das ubs:\n");
-		// cria o objeto Path com base na entrada de usuário
-		Path path = Paths.get(i.nextLine());
+		Path path = Paths.get(i.nextLine());// cria o objeto Path com base na entrada de usuário
 		
 		arquivo.openFile(path);
-		while(arquivo.hasNext()) 
-		//for( int i=0 ; i<3 ; i++)
-		{
-			String[] campos = arquivo.nextLineDividedFields(",");
-				ubss.add(new UBS(campos));				
+		while(arquivo.hasNext()){
+			String line = arquivo.nextLine();
+				ubss.add(new UBS(arquivo.dividedFields(line, ",")));
+				System.out.println(line);
+
 		}
 		arquivo.closeFile();
-
-		System.out.println("digite o arquivo com a saída das informções das ubs:\n");
-		// cria o objeto Path com base na entrada de usuário
-		path = Paths.get(i.nextLine());
-		saida.openFile(path);
-		for (Iterator<UBS> iterator = ubss.iterator(); iterator.hasNext();) {
-			UBS ubs = (UBS) iterator.next();
-			System.out.println(ubs);
-		}
 		
 	}//Fim da main
-
 }//Fim da classe Main

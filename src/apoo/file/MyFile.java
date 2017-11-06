@@ -64,6 +64,11 @@ public class MyFile {
 		return retorno;
 	}
 
+	public String[] dividedFields(String line, String separator) {
+		String[] retorno = line.split(separator);
+		return retorno;
+	}
+
 	public void closeFile() {
 		if (inputFile != null) {
 			inputFile.close();
