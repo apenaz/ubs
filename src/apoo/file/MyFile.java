@@ -6,7 +6,7 @@ package apoo.file;
 //para abrir e ler arquivo
 import java.nio.file.Path;
 import java.util.Scanner;
-// algumas exceções possíveis
+// algumas exceÃ§Ãµes possÃ­veis
 import java.io.IOException;
 import java.lang.IllegalStateException;
 import java.util.NoSuchElementException;
@@ -21,7 +21,7 @@ public class MyFile {
 	private static Scanner inputFile;
 	private String line = "";
 	
-	public void openFile(Path path) {// abre o arquivo indicado
+	public void openFile(Path path) {//abre o arquivo indicado
 		try {
 			inputFile = new Scanner(path.toAbsolutePath());
 		} catch (IOException ioExceprion) {
@@ -34,7 +34,7 @@ public class MyFile {
 		return inputFile.hasNext();
 	}
 
-	public String nextLine()//lê a próxima linha do arquivo
+	public String nextLine()//ler a proxima linha do arquivo
 	{
 		try
 		{
@@ -44,7 +44,7 @@ public class MyFile {
 			}
 			else 
 			{
-				System.err.println("não há mais linhas para leitura");
+				System.err.println("nao ha mais linhas para leitura");
 			}
 		}
 		catch (NoSuchElementException elementException)
@@ -56,7 +56,7 @@ public class MyFile {
 			System.err.println("Error reading from file. Terminating.");
 		}
 		return line;
-	} // fim do método nextLine
+	} // fim do metodo nextLine
 
 	public String[] nextLineDividedFields(String separator) {
 		line = inputFile.nextLine();

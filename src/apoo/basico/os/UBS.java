@@ -26,23 +26,23 @@ public class UBS {
 		try {
 			vlr_latitude = Double.parseDouble(atributo[0]);
 		} catch (NumberFormatException e) {
-			  System.err.println("valor de latitude inválido!");
+			  System.err.println("valor de latitude invalido!");
 		}
 		
 		try {
 			vlr_longitude= Double.parseDouble(atributo[1]);
 		} catch (NumberFormatException e) {
-			  System.err.println("valor de longitude inválido!");
+			  System.err.println("valor de longitude invalido!");
 		}
 		try {
 			cod_munic= Integer.parseInt(atributo[2]);
 		} catch (NumberFormatException e) {
-			System.err.println("valor de codigo de município inválido!");
+			System.err.println("valor de codigo de municipio invalido!");
 		}
 		try {
 		cod_cnes= Integer.parseInt(atributo[3]);
 		} catch (NumberFormatException e) {
-			System.err.println("valor de codigo de estabelecimento de saúde inválido!");
+			System.err.println("valor de codigo de estabelecimento de saide invalido!");
 		}
 		nom_estab= atributo[4];
 		dsc_endereco= atributo[5];
@@ -193,7 +193,7 @@ public class UBS {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("Ubs: %s, CNES: %d,\n" + "Endereço:%s, %s, %s\n" + "Telefone: %s", nom_estab, cod_cnes,
+		return String.format("Ubs: %s, CNES: %d,\n" + "Endereco:%s, %s, %s\n" + "Telefone: %s", nom_estab, cod_cnes,
 				dsc_endereco, dsc_bairro, dsc_cidade, dsc_telefone);
 	}
 

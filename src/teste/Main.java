@@ -28,16 +28,16 @@ public class Main {
 		
 		i = new Scanner(System.in);
 		
-		System.out.println("digite o arquivo com as informções das ubs:\n");
-		Path path = Paths.get(i.nextLine());// cria o objeto Path com base na entrada de usuário
+		System.out.println("digite o arquivo com as informacoes das ubs:\n");
+		Path path = Paths.get(i.nextLine());// cria o objeto Path com base na entrada de usuario
 		
 		arquivo.openFile(path);
 		while(arquivo.hasNext()){
 			String line = arquivo.nextLine();
 				ubss.add(new UBS(arquivo.dividedFields(line, ",")));
 				System.out.println(line);
-
 		}
+		
 		arquivo.closeFile();
 		
 	}//Fim da main
