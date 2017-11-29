@@ -163,7 +163,7 @@ public class Filtros {
 	public boolean estado(UBS ubs, int compara) {
 		boolean retorno;
 		int municipio = ubs.getCod_munic();
-		if( municipio >= (compara*10000) || municipio <= ( ( (compara+1) *10000) - 1)) {
+		if( municipio >= (compara*10000) && municipio < (  (compara+1) * 10000) ) {
 			retorno =  true;
 		}
 		else {

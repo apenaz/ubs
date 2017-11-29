@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import apoo.basico.os.UBS;
+import apoo.file.Filtros;
  
  
 public class Dialogo implements ActionListener {
@@ -43,7 +44,10 @@ public class Dialogo implements ActionListener {
     // Declara variaveis
     String linha;
     List<UBS> ubss = new ArrayList<UBS>();
-    int i = 0;
+	List<UBS> ubsSelecionadasEstado = new ArrayList<UBS>();
+	List<UBS> ubsSelecionadas = new ArrayList<UBS>();
+	Filtros selecao = new Filtros();
+	
     public Container criaPainel()
     {
         // Cria painel principal
@@ -63,7 +67,7 @@ public class Dialogo implements ActionListener {
                  
         // Cria barras de rolagem
         barra.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        barra.setPreferredSize(new Dimension(300, 200));
+        barra.setPreferredSize(new Dimension(1000, 600));
              
         // Alinha componentes
         rotulo.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,7 +109,7 @@ public class Dialogo implements ActionListener {
         {
             // Cria variavel de dialogo
             int retorno = dlg.showOpenDialog(texto);
-             
+          
             // Verifica dialogo
             if (retorno == JFileChooser.APPROVE_OPTION)
             {
@@ -137,20 +141,38 @@ public class Dialogo implements ActionListener {
                 // Laço nas linhas do arquivo
                 while (linha != null)
                 {
-                    // Adiciona linha na area de texto
-                    texto.append(++i + linha + "\n");
-                     
+                    
+                    
+                    ubss.add(new UBS(linha.split(",")));                       
+ 
                     try {
                         linha = buffer.readLine();
-                        ubss.add(new UBS(linha.split(",")));                       
-        				//System.out.printf("%s",ubss.get(i));
                     } 
                     catch (IOException e) 
                     {                       
                         e.printStackTrace();
+                        continue;
                     }
                      
                 }
+                texto.append("total de ubs no país: " + ubss.size());
+        		for (UBS ubs : ubss) {
+        			if(selecao.estado(ubs, 23)) {
+        				ubsSelecionadasEstado.add(ubs);
+        			}
+        		}
+        		for (UBS ubs : ubsSelecionadasEstado) {
+        			if( selecao.telefone(ubs, "Não se aplica") || selecao.estruturaFisica(ubs, 1) || selecao.estruturaFisicaAdaptacao(ubs, 1) || selecao.equipamentos(ubs, 1) || selecao.medicamentos(ubs, 1)){
+        				ubsSelecionadas.add(ubs);
+        			}
+        			
+        		}
+        		texto.append("numero de ubs encontradas no estado: " +  ubsSelecionadasEstado.size());
+        		texto.append("numero de ubs encontradas no estado com alguma deficiencia: " + ubsSelecionadas.size());
+        		for (UBS ubs : ubsSelecionadas) {
+        			texto.append(ubs.toString());
+        		}
+                
             }
         }
          

@@ -25,6 +25,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		List<UBS> ubss = new ArrayList<UBS>();
+		List<UBS> ubsSelecionadasEstado = new ArrayList<UBS>();
 		List<UBS> ubsSelecionadas = new ArrayList<UBS>();
 		Filtros selecao = new Filtros();
 		MeuArquivo arquivo = new MeuArquivo();
@@ -42,15 +43,22 @@ public class Main {
 				ubss.add(new UBS(arquivo.dividedFields(line, ",")));
 				//System.out.println(line);
 		}
-		System.out.printf("\nacabou de ler tudo\n");
-		System.out.printf("total de ubs no país: %d: ", ubss.size());
+		//System.out.printf("\nacabou de ler tudo\n");
 		
+		System.out.printf("total de ubs no país: %d: ", ubss.size());
 		for (UBS ubs : ubss) {
-			if(selecao.telefone(ubs, "Não se aplica")) {
-				ubsSelecionadas.add(ubs);
+			if(selecao.estado(ubs, 23)) {
+				ubsSelecionadasEstado.add(ubs);
 			}
 		}
-		System.out.printf("\nnumero de ubs encontradas: %d\n", ubsSelecionadas.size());
+		for (UBS ubs : ubsSelecionadasEstado) {
+			if( selecao.telefone(ubs, "Não se aplica") || selecao.estruturaFisica(ubs, 1) || selecao.estruturaFisicaAdaptacao(ubs, 1) || selecao.equipamentos(ubs, 1) || selecao.medicamentos(ubs, 1)){
+				ubsSelecionadas.add(ubs);
+			}
+			
+		}
+		System.out.printf("numero de ubs encontradas no estado: %d\n", ubsSelecionadasEstado.size());
+		System.out.printf("numero de ubs encontradas no estado com alguma deficiencia: %d\n", ubsSelecionadas.size());
 		
 		for (UBS ubs : ubsSelecionadas) {
 			System.out.println(ubs);
